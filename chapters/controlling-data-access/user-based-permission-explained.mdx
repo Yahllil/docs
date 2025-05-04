@@ -1,0 +1,159 @@
+---
+title: User-Based Permission Explained
+sidebarTitle: User-Based Permission
+description: Learn how to dynamically show only the records relevant to the specific individual viewing the snippet using User-based Permission.
+icon: circle-user
+---
+
+<Tip icon="lock">
+  **Personalized Data Access**  
+  As discussed in [Understanding the Permission Mechanism](/chapters/controlling-data-access/understanding-the-permission-mechanism), you might not want every viewer to see the entire list.<br/>**User-based Permission** allows you to dynamically show only the records relevant to the *specific individual* viewing the snippet.
+</Tip>
+
+While [**Static Filters**](/chapters/selecting-which-data-to-display/setting-filters-and-sorting-for-multiple-items-snippets) can narrow down the list for *everyone*, user-based permission is the key to building secure, personalized experiences like client portals or vendor dashboards using a single, manageable snippet.
+
+## How User-Based Permission Filters Data
+
+Enabling User-based Permission essentially adds a dynamic filter layer on top of any static filters you've applied. Here's the process:
+
+#### The Permission Process
+
+<Steps>
+  <Step title="Configure the Permission Field">
+    In **Step 2** of the Snippet Builder, select the **"User-based permission"** option. Then, choose a specific field from your Airtable table using the dropdown. This chosen **Permission Field** must contain a value that uniquely identifies the viewer (e.g., their email, a unique ID, a phone number).
+
+    [Screenshot highlighting the "User-based permission" radio button selected and the dropdown menu for choosing the "Permission Field".]
+  </Step>
+  <Step title="Obtain the Viewer's Identifier (Permission Value)">
+    When someone accesses the snippet's URL, Crust AI needs to determine *their* unique identifier value (the **Permission Value**). This happens in one of two ways:
+    <Tabs>
+      <Tab title="Manually Submitting Input">
+        If the viewer accesses the generic Shareable URL (copied from the main "Get Shareable URL" button in Step 4), and the URL *doesn't* contain a pre-filled identifier, Crust AI will present an "Access Required" screen, prompting the viewer to enter their specific value (e.g., "Enter your Client Email").
+
+        [Screenshot of the "Access Required" modal asking for the specific identifier value.]
+      </Tab>
+      <Tab title="Pre-filled via URL Parameter (Direct URL / Magic Link)">
+        If the viewer accesses a "Direct URL" (typically generated using the "View as" feature in the builder or constructed via automation), the URL will contain a `?p=` parameter followed by the viewer's identifier (e.g., `?p=client@email.com` or `?p=recABCXYZ`). Crust AI uses this value directly, bypassing the "Access Required" screen.
+
+        [Screenshot highlighting a Shareable URL with the `?p=value` parameter appended.]
+      </Tab>
+    </Tabs>
+  </Step>
+  <Step title="Matching and Filtering">
+    Crust AI takes the obtained Permission Value and compares it against the values in the configured Permission Field for *all* records in your table (that have already passed any static filters).
+  </Step>
+  <Step title="Displaying Relevant Records">
+    Only the records where the value in the Permission Field **exactly matches** the viewer's Permission Value are displayed in the snippet's List View.
+  </Step>
+</Steps>
+
+---
+
+## Choosing the Right Permission Field
+
+Selecting the correct field in your Airtable table to use as the Permission Field is crucial.
+
+*   **Requirement:** The field must exist *within the table the snippet is based on*.
+*   **Identifier:** The value in this field should uniquely identify the user or entity you want to grant access to.
+*   **Common Use Cases:** Email address is often convenient, but consider security implications (covered below).
+
+---
+
+## Handling Linked Record Identifiers (Using Lookup Fields)
+
+A very common scenario is that the unique identifier you want to use (like a Client's Email) isn't directly in the table your snippet is based on (e.g., the "Campaigns" table). Instead, it's in a linked table (e.g., a "Clients" table).
+
+<Warning>
+  **Important Limitation**  
+  Crust AI's User-based Permission **cannot directly use a Linked Record field** as the Permission Field. You need to bring the identifier *into* the table the snippet is based on.
+</Warning>
+
+The standard Airtable solution for this is a **Lookup Field**. A Lookup field in Airtable pulls specific information from a linked record into the current table.
+
+### Example: Setting Permission by Client Email (via Lookup)
+
+Let's adapt our marketing campaign example. Assume:
+
+*   Your snippet is based on the **Campaigns** table.
+*   The Campaigns table has a **Client** field (Linked Record type) linking to your **Clients** table.
+*   The **Clients** table has an **Email** field (Email type).
+
+To set permission based on the Client's Email in your Campaigns snippet:
+
+<Steps>
+    <Step title="Create Lookup Field (Airtable)">
+        Go to your **Campaigns** table in Airtable. Add a new **Lookup** field. Configure it:
+        *   Source field: **Client** (Linked Record)
+        *   Field to retrieve: **Email** (from Clients table)
+        *   Name it: `Client Email Lookup`
+        Click **Create field**. This field now shows the linked client's email on each campaign record.
+
+        [Gif showing the process of adding a Lookup field in Airtable: clicking +, selecting Lookup, choosing the linked record field, choosing the Email field, naming it "Client Email Lookup", and saving.]
+    </Step>
+    <Step title="Configure Permission (Crust AI)">
+        Go back to your Campaigns snippet in the Crust AI Builder (refresh if needed). Navigate to **Step 2 -> Permission**.
+        *   Select **User-based permission**.
+        *   In the "Which field holds the user's identifier?" dropdown, select your new **"Client Email Lookup"** field.
+        *   Click **Apply Permission**.
+    </Step>
+</Steps>
+
+Now, the snippet will correctly filter campaigns based on the email address entered by the viewer or provided in the URL, matching it against the email pulled in via the Lookup field.
+
+---
+
+## Enhancing Security: Using Record IDs
+
+While using email is common, if security is paramount and you worry clients might guess each other's emails, you can use a less guessable unique identifier like the Airtable **Record ID** of the client.
+
+### Example: Setting Permission by Client Record ID (via Formula & Lookup)
+
+<Steps>
+    <Step title="Create Formula Field (Airtable - Clients Table)">
+        Go to your **Clients** table in Airtable. Add a new **Formula** field.
+        *   Enter the formula: `RECORD_ID()`
+        *   Name it: `Client Record ID`. Save it.
+        This field now displays the unique Airtable Record ID for each client.
+
+        [Screenshot of adding a Formula field in Airtable, entering RECORD_ID(), and naming it "Client Record ID".]
+    </Step>
+    <Step title="Create Lookup Field (Airtable - Campaigns Table)">
+        Go to your **Campaigns** table. Add a new **Lookup** field. Configure it:
+        *   Source field: **Client** (Linked Record)
+        *   Field to retrieve: **"Client Record ID"** (the formula field you just created in the Clients table).
+        *   Name it: `Client Record ID Lookup`. Save it.
+
+        [Screenshot of adding the second Lookup field in the Campaigns table, this time selecting the "Client Record ID" formula field from the Clients table.]
+    </Step>
+    <Step title="Configure Permission (Crust AI)">
+        Go back to your Campaigns snippet in the Crust AI Builder (refresh if needed). Navigate to **Step 2 -> Permission**.
+        *   Select **User-based permission**.
+        *   Choose the **"Client Record ID Lookup"** field as the Permission Field.
+        *   Click **Apply Permission**.
+    </Step>
+</Steps>
+
+Now, the permission check relies on the much more secure Airtable Record ID. The "Permission Value" needed will be the client's Record ID (e.g., `recABCXYZ`). You would typically *only* share this via Direct URLs generated through Airtable automations or buttons, embedding the specific client's Record ID into the `?p=` parameter, making it function like a secure magic link.
+
+---
+
+## Using the "View as" Feature for Testing
+
+When User-based permission is active, the "View as" input box appears in Step 2. This is invaluable for testing:
+
+<Accordion title="Testing Permissions">
+*   Enter a valid identifier (email, record ID, etc., depending on your chosen permission field) into the "View as" box.
+*   The table preview below *and* the phone preview on the right will update to show only the records that match that identifier, simulating what that specific user would see.
+*   The **Copy Direct URL** icon next to the "View as" box becomes active. Clicking this copies the Shareable URL with the `?p=` parameter automatically populated with the identifier you entered in the "View as" box.
+
+[Gif showing a user entering an email/Record ID into the "View as" box, the previews filtering, and then clicking the "Copy Direct URL" icon.]
+</Accordion>
+
+This allows you to confidently verify your permission setup and generate specific magic links for different users directly from the builder.
+
+---
+
+<Tip icon="lightbulb">
+  **Key Takeaway**  
+  User-based permission is a cornerstone of creating secure, personalized data applications with Crust AI. By correctly configuring the permission field (often using Airtable Lookup fields) and understanding how identifiers are provided, you can share precisely the right data with the right people.
+</Tip>

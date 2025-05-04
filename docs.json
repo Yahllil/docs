@@ -1,102 +1,93 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "Crust AI Documentation",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#752AC5",
+    "light": "#752AC5",
+    "dark": "#752AC5"
+  },
+  "icons": {
+    "library": "lucide"
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
-          }
+        "group": "Getting Started",
+        "pages": [
+          "chapters/getting-started/crust-ai-overview",
+          "chapters/getting-started/key-concepts",
+          "chapters/getting-started/quickstart-build-your-first-snippet"
         ]
       },
       {
-        "tab": "API Reference",
-        "groups": [
-          {
-            "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
-          },
-          {
-            "group": "Endpoint Examples",
-            "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
-            ]
-          }
+        "group": "Understanding Snippets",
+        "pages": [
+          "chapters/building-and-understanding-snippets/the-snippet-builder-interface",
+          "chapters/building-and-understanding-snippets/understanding-snippet-types"
+        ]
+      },
+      {
+        "group": "Selecting Which Data to Display",
+        "pages": [
+          "chapters/selecting-which-data-to-display/selecting-a-record-for-single-item-snippets",
+          "chapters/selecting-which-data-to-display/setting-filters-and-sorting-for-multiple-items-snippets"
+        ]
+      },
+      {
+        "group": "Controlling Data Access",
+        "pages": [
+          "chapters/controlling-data-access/understanding-the-permission-mechanism",
+          "chapters/controlling-data-access/user-based-permission-explained"
+        ]
+      },
+      {
+        "group": "Customizing Design & Appearance",
+        "pages": [
+          "chapters/customizing-design-and-appearance/customizing-the-snippet-ui-ux",
+          "chapters/customizing-design-and-appearance/mobile-and-desktop-responsiveness"
+        ]
+      },
+      {
+        "group": "Update Data and Trigger Actions",
+        "pages": [
+          "chapters/update-data-and-trigger-actions/adding-interactive-elements-to-update-data",
+          "chapters/update-data-and-trigger-actions/fire-an-automation-directly-from-a-snippet"
+        ]
+      },
+      {
+        "group": "Sharing Your Snippets",
+        "pages": [
+          "chapters/sharing-your-snippets/understanding-the-shareable-url-structure",
+          "chapters/sharing-your-snippets/share-a-snippet-directly-from-airtable",
+          "chapters/sharing-your-snippets/integrate-a-snippet-in-a-make-or-zapier-flow"
+        ]
+      },
+      {
+        "group": "Navigating Between Snippets",
+        "pages": [
+          "chapters/navigating-between-snippets-for-building-robust-apps/why-link-snippets",
+          "chapters/navigating-between-snippets-for-building-robust-apps/how-to-add-navigation-to-snippets"
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "/logo/logo.png",
+    "dark": "/logo/logo.png"
   },
   "navbar": {
     "links": [
       {
         "label": "Support",
-        "href": "mailto:hi@mintlify.com"
+        "href": "mailto:contact@trycrust.ai"
       }
     ],
     "primary": {
       "type": "button",
-      "label": "Dashboard",
-      "href": "https://dashboard.mintlify.com"
-    }
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+      "label": "Back to Snippet Builder",
+      "href": "https://app.trycrust.ai"
     }
   }
 }

@@ -1,0 +1,54 @@
+---
+title: Mobile & Desktop Responsiveness
+sidebarTitle: Desktop Responsiveness
+description: Ensure your Crust AI snippets provide a seamless experience across mobile, tablet, and desktop devices.
+icon: monitor-smartphone
+---
+
+<Tip icon="smartphone">
+  **Cross-Device Experience**  
+  Crust AI Snippets are designed from the ground up to be accessible and functional across different devices. Whether your end-users are viewing a snippet on their mobile phone, tablet, or desktop computer, the experience should be seamless.
+</Tip>
+
+## Default: Mobile-First Approach
+
+By default, when Crust AI's AI initially generates your snippet layout in Step 3 ("Make It Perfect"), it prioritizes a **mobile-first design**. This means the layout is optimized for smaller screens, reflecting the common use case of sharing snippets with users who might be accessing them on the go.
+
+The phone preview within the Snippet Builder accurately reflects this mobile-first layout.
+
+[Screenshot of the Snippet Builder interface with the phone preview prominently displayed.]
+
+---
+
+## Adapting for Desktop Views
+
+While the mobile-first layout is functional on desktops, you might want a more optimized arrangement that takes advantage of the wider screen real estate (e.g., using columns, different element sizing).
+
+You can easily instruct the AI to create a responsive desktop layout using the **AI Prompt** in Step 3. A simple prompt can achieve this:
+
+<Accordion title="Example Prompt: Desktop Responsiveness">
+```text
+Make this design responsive for desktop, while keeping the mobile layout the same.
+```
+The AI will analyze the existing mobile layout and intelligently adjust the arrangement and styling for larger screens, often arranging elements into columns or adjusting spacing, without negatively impacting the original mobile view.
+</Accordion>
+
+[Optional Gif: Showing a mobile-first layout, then typing the prompt, and the preview (ideally switched to desktop view) showing a rearranged layout suitable for wider screens.]
+
+---
+
+## Previewing Desktop Responsiveness
+
+To see how your snippet will look on a desktop computer *before* sharing:
+
+1.  In the Snippet Builder (Step 3), click the **Full Screen** preview icon <Icon icon="expand" /> in the top right of the builder interface.
+
+    [Screenshot highlighting the Full Screen preview icon.]
+
+2.  A larger preview window will open. Within this window, you'll find options to toggle the preview between **Mobile** and **Desktop** device simulations.
+
+    [Screenshot of the Full Screen preview modal, highlighting the "Mobile" and "Desktop" toggle buttons.]
+
+3.  Select **Desktop** to see how your current design renders on a wider screen.
+
+This allows you to fine-tune both the mobile and desktop experiences using the AI prompt until you are satisfied with the presentation on all common device types.

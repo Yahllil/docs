@@ -1,0 +1,109 @@
+---
+title: Share a Snippet Directly from Airtable
+sidebarTitle: Share Directly from Airtable
+description: Learn how to use Airtable Button fields to seamlessly view or share specific Crust AI snippet views directly from your records.
+icon: screen-share
+---
+
+<Tip icon="link">
+  **Seamless Integration**  
+  While you can always copy and paste a snippet's Shareable URL, Airtable's own features allow you to integrate Crust AI snippets directly into your base workflows, making it seamless to view or share specific snippet views right from your records.
+</Tip>
+
+Sharing snippets directly inside Airtable is typically done using Airtable's **Button** field type.
+
+## 1. Opening a Specific Record's Snippet from Airtable
+
+Imagine you want a button directly on your "Campaigns" table in Airtable that, when clicked for a specific campaign record, opens the Crust AI Single Item Snippet showing *that exact campaign's* details.
+
+<Steps>
+  <Step title="Prerequisite">
+    You have already created a **Single Item Snippet** based on your "Campaigns" table in Crust AI. ([Quickstart](/chapters/getting-started/quickstart-build-your-first-snippet))
+  </Step>
+  <Step title="Create Airtable Button Field">
+    In your Airtable "Campaigns" table, create a new field of type **Button**. Name it something clear, like "View Campaign Snippet".
+  </Step>
+  <Step title="Configure Button Action (Open URL)">
+    Set the button's action to **Open URL**.
+  </Step>
+  <Step title="Construct Dynamic URL Formula">
+    In the URL formula box, you need to build the link to your specific snippet and dynamically insert the Record ID of the *current* row.
+
+    1.  Get the base URL and Snippet ID from your snippet in the Crust AI builder (e.g., `https://app.trycrust.ai/snippets/<YOUR_SNIPPET_ID>/view/single`). **Important:** Remove any existing `?rec=` parameter from the end if you copied the full URL.
+    2.  Use the `CONCATENATE` function (or the `&` operator) to combine the base URL, `?rec=`, and Airtable's `RECORD_ID()` function.
+
+    **Formula Example:**
+    ```airtable_formula
+"https://app.trycrust.ai/snippets/<YOUR_SNIPPET_ID>/view/single?rec=" & RECORD_ID()
+    ```
+    *(Replace `<YOUR_SNIPPET_ID>` with the actual ID of your snippet)*
+
+    [Screenshot of the Airtable Button field configuration showing the formula combining the snippet base URL and the record ID]
+  </Step>
+</Steps>
+
+**Result:** Now, each record in your "Campaigns" table will have a clickable "View Campaign Snippet" button. Clicking the button on any row will open a new browser tab directly to the Crust AI snippet displaying the details for *that specific campaign record*.
+
+For details on the URL structure and the `rec` parameter, see: [Understanding the Shareable URL Structure](/chapters/sharing-your-snippets/understanding-the-shareable-url-structure)
+
+---
+
+## 2. Creating Buttons to Share Snippet Links (Email, WhatsApp)
+
+You can also create Airtable buttons that initiate sharing the snippet link via other applications, such as email or WhatsApp. This is useful for quickly sending a link to a client or colleague.
+
+<Tabs>
+  <Tab title="Email Sharing Button">
+    **Prerequisite:** You need the dynamically generated URL for the specific record's snippet, as constructed in the previous step (or a static URL if appropriate).
+
+    <Steps>
+        <Step title="Create Button Field">
+            Create a new **Button** field in Airtable. Let's call it "Share via Email".
+        </Step>
+        <Step title="Configure Action">
+            Set the action to **Open URL**.
+        </Step>
+        <Step title="Use mailto: Formula">
+            Construct a `mailto:` URL. The `body` parameter will contain the snippet link. Use `ENCODE_URL_COMPONENT()` if your snippet URL might contain special characters, though often it's not strictly needed for basic URLs here.
+
+            **Formula Example:**
+            ```airtable_formula
+"mailto:?body=" & "https://app.trycrust.ai/snippets/<YOUR_SNIPPET_ID>/view/single?rec=" & RECORD_ID()
+```
+            *(Replace `<YOUR_SNIPPET_ID>` and adjust the subject/body text as needed)*
+        </Step>
+    </Steps>
+  </Tab>
+  <Tab title="WhatsApp Sharing Button">
+    <Steps>
+        <Step title="Create Button Field">
+            Create a new **Button** field for WhatsApp, named "Share via WhatsApp".
+        </Step>
+        <Step title="Configure Action">
+            Set the action to **Open URL**.
+        </Step>
+        <Step title="Use WhatsApp URL Scheme">
+            Use the `https://wa.me/` scheme. The message content goes into the `text` parameter. Make sure to URL-encode the snippet link.
+
+            **Formula Example:**
+            ```airtable_formula
+"https://wa.me/?text=" & "https://app.trycrust.ai/snippets/<YOUR_SNIPPET_ID>/view/single?rec=" & RECORD_ID()
+            ```
+             *(Replace `<YOUR_SNIPPET_ID>` and adjust the message text as needed)*
+        </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+**Result:** Clicking the "Share via Email" button will open the user's default email client with a pre-populated subject and body containing the snippet link. Clicking "Share via WhatsApp" will open WhatsApp with a pre-filled message containing the link.
+
+[Screenshot showing two new Button fields in Airtable: "Share via Email" and "Share via WhatsApp".]
+
+<Tip icon="lightbulb">
+  **URL Structure is Key**  
+  Remember to replace placeholders with your actual Snippet ID. The structure of the dynamic URL is crucial for these buttons to work correctly. Refer again to: [Understanding the Shareable URL Structure](/chapters/sharing-your-snippets/understanding-the-shareable-url-structure)
+</Tip>
+
+---
+
+Integrating snippet links directly into your Airtable base using Button fields provides powerful shortcuts for viewing and sharing specific, dynamic data views generated by Crust AI.

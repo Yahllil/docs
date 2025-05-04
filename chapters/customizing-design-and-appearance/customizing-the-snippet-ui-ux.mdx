@@ -1,0 +1,132 @@
+---
+title: Customizing the Snippet UI/UX
+sidebarTitle: Design & UI/UX
+description: Learn how to use the AI Prompt and other tools to design and customize the appearance and layout of your Crust AI snippets.
+icon: palette
+---
+
+<Tip icon="palette">
+  **Design Freedom**  
+  One of the core strengths of Crust AI is its design flexibility. Unlike many tools that restrict you to predefined components or layouts, Crust AI allows you to achieve virtually any design you envision for your snippets. This enables you to create truly custom, branded experiences for your end-users, presenting your Airtable data in the most effective and visually appealing way possible.
+</Tip>
+
+## Designing with Natural Language: The AI Prompt
+
+The primary method for customizing the design and layout of your snippet is through simple, natural language instructions using the **AI Prompt**. You'll find this prompt input field in **Step 3 ("Make It Perfect")** of the Snippet Builder, located directly below the live phone preview.
+
+[Screenshot of the Snippet Builder interface highlighting Step 3 ("Make It Perfect") and pointing specifically to the text input box labeled "What would you like to modify?".]
+
+---
+
+## What Can You Customize via Prompt?
+
+The AI prompt is powerful and can handle a wide range of requests related to the snippet's appearance and user interaction:
+
+#### Visual Styling
+Change colors, texts, sizes, spacing, borders, backgrounds, icons, etc.
+
+**Example Prompts:**
+```text
+Change the header background to red
+```
+```text
+Make the campaign budget value bold and use a larger font size
+```
+
+---
+#### Showing/Hiding Fields
+Control which fields from your Airtable table are visible within the snippet.
+
+**Example Prompts:**
+```text
+Hide the 'Internal Notes' field
+```
+```text
+Show the 'Last Updated' field below the campaign status
+```
+
+---
+#### Incorporating Schema Changes
+If you add a new field to your Airtable table *after* initially creating the snippet, you can instruct the prompt to include it in the display. (Remember to potentially refresh the builder page or schema first so Crust AI recognizes the new field).
+
+**Example Prompts:**
+```text
+Add the 'Campaign Manager Photo' field next to the Campaign Name
+```
+
+---
+#### Layout Adjustments
+Change how elements or records are arranged.
+
+**Example Prompts:**
+```text
+Display the campaigns in a grid view with 2 columns instead of a list
+```
+```text
+Move the 'Client Contact' section above the 'Billing Overview'
+```
+
+---
+#### Conditional Rendering & Styling
+Apply specific styles or show/hide elements based on the data within a record. Crust AI understands your data structure and can apply logic.
+
+**Example Prompts:**
+```text
+If the 'Status' field is 'Completed', make the header background green. If the 'Status' is 'Failed', make the header background red.
+```
+```text
+Only show the 'Request Revision' button if the 'Status' is 'Pending Approval'
+```
+
+---
+#### Adding Interactive Elements
+Instruct the AI to add buttons, checkboxes, dropdowns, or other elements that allow users to interact with the data (e.g., update fields).
+<br/>*Learn more:* [Adding Interactive Elements to Update Data](/chapters/update-data-and-trigger-actions/adding-interactive-elements-to-update-data)
+
+**Example Prompts:**
+```text
+Add a checkbox that allows the user to edit the 'Approved' field
+```
+```text
+Allow the user to update the status using a dropdown
+```
+
+[Gif showing a user typing "Make the status a green chip if Active" into the prompt and the phone preview updating accordingly.]
+
+---
+
+## Tips for Effective Prompting
+
+  *   **Be Specific:** Clearly state what element you want to change and how you want to change it. Instead of "Make it look better," try "Increase the spacing around the client name."
+  *   **Use Accurate Field Names:** Refer to your Airtable fields by their exact names for the AI to understand correctly (e.g., use `'Client Email'` not just `'email'`).
+  *   **One Change at a Time:** For complex modifications, it's often better to break down your request into smaller, sequential prompts rather than one very long instruction. Apply one change, check the preview, then apply the next.
+
+---
+
+## Important: Apply Prompts to the Correct View
+
+<Warning>
+  **Multiple Items Snippet Consideration**  
+  When working with a **Multiple Items Snippet**, remember that it has both a **List View** and a **Detail View**. The AI prompt applies changes *only to the view currently active in the preview* (Step 3).
+</Warning>
+
+[Screenshot highlighting the List View/Detail View toggle buttons above the phone preview, emphasizing the need to select the correct view before prompting.]
+
+---
+
+## Important: Prompt Limitations
+
+<Warning>
+  **What Prompts Cannot Do**  
+  While powerful for UI/UX, the AI prompt **only affects the snippet's presentation layer**. It **cannot** be used to:
+
+  *   **Modify Airtable Schema:** You cannot add new fields, delete fields, or change field types in your underlying Airtable table using the prompt. This must be done directly in Airtable.
+  *   **Change Data Selection/Permissions:** The prompt cannot alter which records are pulled into the snippet. Filters, Sorting, and Permissions are configured exclusively in Step 2.
+  *   **Alter Snippet Type:** You cannot change a snippet from Single Item to Multiple Items (or vice-versa) using the prompt; this is done in Step 1.
+</Warning>
+
+Think of the prompt as your way to style and arrange the data *after* it has been selected and filtered according to the rules set in Step 2.
+
+---
+
+By leveraging the AI prompt effectively, you can transform the default snippet layout into a highly customized and professional-looking mini-application tailored to your specific needs and branding.

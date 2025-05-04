@@ -1,0 +1,64 @@
+---
+title: Setting Filters & Sorting for Multiple Items Snippets
+sidebarTitle: Multiple Items Snippet
+description: Learn how to control which records appear in a Multiple Items Snippet list using static filters and sorting options.
+icon: filter
+---
+
+<Tip icon="filter">
+  **Controlling Which Records Appear**  
+  A **Multiple Items Snippet** is designed to display a list of records from a specific Airtable table. Unlike a Single Item Snippet, which shows one particular record, the Multiple Items snippet shows a set of records dynamically pulled from your table.
+</Tip>
+
+By default, when you create a Multiple Items snippet and select a table in Step 2, the snippet is configured to display *all* records from that table.
+
+[Screenshot of the Snippet Builder showing Step 2 with "Multiple Items" selected, and the table preview displaying all records from the chosen table.]
+
+However, you often won't want to expose every single record in your table to every viewer. This is where **Filters** and **Sorting** come in.
+
+---
+
+## Filtering Records
+
+Filters allow you to define specific conditions that records must meet to be included and displayed in the snippet's List View. This lets you curate the data presented to the end-user.
+
+[Screenshot highlighting the "Filter" option in Step 2's Data Access Configurations.]
+
+<Accordion title="Example Filter">
+  For example, using our marketing campaign example, if you're creating a snippet for an active client, you might only want them to see campaigns whose `Status` is "Active" or "Paused", but not "Planning" or "Completed". You would add filters here to exclude records based on those unwanted statuses.
+</Accordion>
+
+Filters are configured using simple dropdowns and inputs that reflect the fields in your Airtable table. You can combine multiple filter conditions (`AND`/`OR`) to build complex data subsets.
+
+---
+
+## Sorting Records
+
+Sorting allows you to control the order in which records are presented in the List View of your Multiple Items snippet.
+
+[Screenshot highlighting the "Sort" option in Step 2's Data Access Configurations.]
+
+You can choose a field to sort by (e.g., `Start Date`, `Campaign Name`) and the order (Ascending or Descending). For example, sorting by `Start Date (Descending)` would show the newest campaigns first.
+
+---
+
+## Important Note: Static vs. Dynamic Filtering
+
+The filters you set in Step 2 are **static**. This means they are permanently applied to *this specific snippet*. Any viewer who accesses this snippet's Shareable URL, regardless of who they are, will *only* see the records that pass these static filters.
+
+If you need to filter the data *dynamically* based on the person viewing the snippet (e.g., each client only sees *their own* campaigns, while keeping the snippet URL the same), static filters are usually not the right choice. This dynamic record-level filtering is handled by the [**Permission**](/chapters/controlling-data-access/understanding-the-permission-mechanism) feature.
+
+Learn more about implementing dynamic, user-based data access: [Understanding the Permission Mechanism](/chapters/controlling-data-access/understanding-the-permission-mechanism) and [User-Based Permission Explained](/chapters/controlling-data-access/user-based-permission-explained)
+
+---
+
+## Impact of Changes on Shared URLs
+
+Any changes you make to the Filter or Sort settings will immediately affect ALL existing and future Shareable URLs for that specific snippet.
+
+If you update a filter to exclude certain records, those records will instantly disappear from any live view of that snippet's URL.
+
+<Tip icon="lightbulb">
+  **Pro Tip**  
+  If you need two different lists of data from the same table (e.g., one showing only "Active" campaigns and another showing only "Completed" campaigns), you should create two separate Multiple Items snippets, each with its own filter configuration.
+</Tip>
