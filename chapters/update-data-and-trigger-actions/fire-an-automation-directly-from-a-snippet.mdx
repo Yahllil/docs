@@ -1,12 +1,12 @@
 ---
-title: Fire an Automation Directly from a Snippet
-sidebarTitle: Fire Automations
-description: Learn how to trigger complex workflows in Airtable, Make, Zapier, or other services directly from a button within your Crust AI snippet.
-icon: workflow
+title: "Fire an Automation Directly from a Snippet"
+sidebarTitle: "Fire Automations"
+description: "Learn how to trigger complex workflows in Airtable, Make, Zapier, or other services directly from a button within your Crust AI snippet."
+icon: "workflow"
 ---
 
-<Tip icon="rocket">
-  **Trigger Complex Workflows**  
+<Tip>
+  **Trigger Complex Workflows**\
   Crust AI snippets can do more than just display or update simple field values; they can also serve as the user interface to initiate complex workflows and automations managed outside of Crust AI itself.
 </Tip>
 
@@ -20,15 +20,16 @@ The key to triggering external automations from Crust AI lies in leveraging Airt
   <Step title="Set Up Automation (External)">
     First, ensure your desired automation workflow is configured in your chosen tool (Airtable Native Automation, Make, Zapier, n8n, custom webhook endpoint, etc.). Obtain the specific **Webhook URL** or **Trigger URL** required to start this automation.
 
-    [Logos of Make, Zapier, n8n, etc]
+    ![Crust Integrations2 Pn](/images/crust-integrations2.png)
   </Step>
   <Step title="Configure Airtable Button Field">
     In the Airtable table that your snippet is based on, create a new field of type **Button**.
-    *   Configure the button's action, typically **Open URL**.
-    *   In the URL formula box, paste the **Webhook URL/Trigger URL** obtained in Step 1. You can often include dynamic data from the record in the URL using an Airtable formula if your automation requires it (e.g., `"https://hook.make.com/your-webhook?recordId=" & RECORD_ID()`).
-    *   Give the button a clear label in Airtable (e.g., "Send Welcome Email", "Generate PDF Report").
 
-    [Screenshot of the Airtable interface showing the configuration of a Button field, with the "Open URL" action selected and a placeholder webhook URL in the formula box.]
+    - Configure the button's action, typically **Open URL**.
+    - In the URL formula box, paste the **Webhook URL/Trigger URL** obtained in Step 1. You can often include dynamic data from the record in the URL using an Airtable formula if your automation requires it (e.g., `"https://hook.make.com/your-webhook?recordId=" & RECORD_ID()`).
+    - Give the button a clear label in Airtable (e.g., "Send Welcome Email", "Generate PDF Report").
+
+    ![Add Automation Button Field Gi](/images/add-automation-button-field.gif)
   </Step>
   <Step title="Add Button to Snippet (Crust AI)">
     Use the **AI Prompt** in Step 3 of the Crust AI Snippet Builder to instruct the AI to add a corresponding button to your snippet interface:
@@ -36,11 +37,12 @@ The key to triggering external automations from Crust AI lies in leveraging Airt
     ```
     Add a button labeled 'Send Welcome Email' that triggers the 'Send Welcome Email' button field.
     ```
+
     ```
     Place a 'Generate Report' button here that executes the action of the 'Generate PDF Report' Airtable button.
     ```
 
-    [Gif showing a user typing the prompt "Add a button to trigger the 'Notify Client' Airtable button" and a corresponding button appearing in the snippet preview.]
+    ![Fire Automation Button From Prompt Gi](/images/fire-automation-button-from-prompt.gif)
   </Step>
 </Steps>
 
@@ -48,7 +50,7 @@ The key to triggering external automations from Crust AI lies in leveraging Airt
 
 ## How It Works
 
-When the end-user clicks the button *within the published Crust AI snippet* (this functionality typically does not execute within the builder preview), Crust AI initiates the action configured for the corresponding Airtable Button field. In most automation cases, this means Crust AI makes an HTTP request to the configured Webhook URL.
+When the end-user clicks the button _within the published Crust AI snippet_ (this functionality typically does not execute within the builder preview), Crust AI initiates the action configured for the corresponding Airtable Button field. In most automation cases, this means Crust AI makes an HTTP request to the configured Webhook URL.
 
 Your external automation service (Airtable, Make, Zapier, n8n, etc.) then receives this trigger via the webhook and executes its predefined workflow, potentially using any data passed along in the URL.
 
@@ -58,10 +60,10 @@ This allows you to embed powerful backend processes behind simple buttons in you
 
 ## Benefits
 
-*   **Simplified User Experience:** Users trigger complex workflows with a single click in a clean interface.
-*   **Centralized Automation Logic:** Keep your automation workflows within your preferred tools (Airtable, Make, Zapier, etc.).
-*   **Enhanced Functionality:** Add capabilities to your snippets far beyond simple data display and editing.
-*   **Integration:** Seamlessly connect your snippet front-end to various backend services and platforms.
+- **Simplified User Experience:** Users trigger complex workflows with a single click in a clean interface.
+- **Centralized Automation Logic:** Keep your automation workflows within your preferred tools (Airtable, Make, Zapier, etc.).
+- **Enhanced Functionality:** Add capabilities to your snippets far beyond simple data display and editing.
+- **Integration:** Seamlessly connect your snippet front-end to various backend services and platforms.
 
 ---
 
