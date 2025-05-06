@@ -23,123 +23,114 @@ Let's walk through each section and the key controls you'll find.
 
 ---
 
-## 1. Select Snippet Type
+<Steps>
+  <Step title="Select Snippet Type" titleSize="h2">
+    This is the very first step when creating a new snippet. As covered in the [Understanding Snippet Types](/chapters/building-and-understanding-snippets/understanding-snippet-types) page, you choose between Single Item or Multiple Items.
 
-This is the very first step when creating a new snippet. As covered in the [Understanding Snippet Types](/chapters/building-and-understanding-snippets/understanding-snippet-types) page, you choose between Single Item or Multiple Items.
+    - **Single Item**: For displaying detailed information of one specific record.
+    - **Multiple Items**: For displaying a list of filtered records.
 
-- **Single Item**: For displaying detailed information of one specific record.
-- **Multiple Items**: For displaying a list of filtered records.
+    ![Quickstart Change To Multi Gi](/images/quickstart-change-to-multi.gif)
 
-![Quickstart Change To Multi Gi](/images/quickstart-change-to-multi.gif)
+    This choice impacts how Step 2 is presented and whether you have access to both List View and Detail View in Step 3.
 
-This choice impacts how Step 2 is presented and whether you have access to both List View and Detail View in Step 3.
+    For a deeper dive into the differences between these types, see: [Understanding Snippet Types](/chapters/building-and-understanding-snippets/understanding-snippet-types).
+  </Step>
+  <Step title="Select Data / Set Filters & Permissions" titleSize="h2">
+    This section is where you see your selected Airtable table and determine the data that will populate the snippet. The appearance of this section changes slightly based on whether you chose "Single Item" or "Multiple Items" in Step 1.
 
-For a deeper dive into the differences between these types, see: [Understanding Snippet Types](/chapters/building-and-understanding-snippets/understanding-snippet-types)
+    On the left side, you'll see a preview of your data directly from the connected Airtable table.
 
----
+    <Tabs>
+      <Tab title="Single Item">
+        If you selected Single Item: The table preview will show all records, and you'll select a specific record using a radio button next to it. The preview on the right will immediately show the Detail View for that chosen record. This selected record will also affect the Shareable URL.
 
-## 2. Select Data / Set Filters & Permissions
+        ![Quick Start Single Snippet Record Selection Gi](/images/quick-start-single-snippet-record-selection.gif)
+      </Tab>
+      <Tab title="Multiple Items">
+        If you selected Multiple Items: The table preview shows all records by default, as the snippet will ultimately display a list of records. The preview on the right will show the List View of your data.
 
-This section is where you see your selected Airtable table and determine the data that will populate the snippet. The appearance of this section changes slightly based on whether you chose "Single Item" or "Multiple Items" in Step 1.
+        ![Interface Multi Snippet Pn](/images/interface-multi-snippet.png)
+      </Tab>
+    </Tabs>
+    ### Multi-Items Data Access Configurations
 
-On the left side, you'll see a preview of your data directly from the connected Airtable table.
+    For multi-items snippets only, the controls in this section allow you to specify which data (based on criteria or user identity) will be pulled from the table. It includes:
 
-<Tabs>
-  <Tab title="Single Item">
-    If you selected Single Item: The table preview will show all records, and you'll select a specific record using a radio button next to it. The preview on the right will immediately show the Detail View for that chosen record. This selected record will also affect the Shareable URL.
+    - **Filter**: Apply static filters to include only records that meet specific conditions (e.g., only show records where "Status is 'Active'"). These filters apply to anyone viewing the snippet.
+    - **Sort**: Define the order in which records appear in the List View of a Multiple Items snippet.
+    - **Permission**: Control who can see the data. This is crucial for implementing user-based filtering.
 
-    ![Quick Start Single Snippet Record Selection Gi](/images/quick-start-single-snippet-record-selection.gif)
-  </Tab>
-  <Tab title="Multiple Items">
-    If you selected Multiple Items: The table preview shows all records by default, as the snippet will ultimately display a list of records. The preview on the right will show the List View of your data.
+    ![Data Access Config Pn](/images/data-access-config.png)
 
-    ![Interface Multi Snippet Pn](/images/interface-multi-snippet.png)
-  </Tab>
-</Tabs>
+    Learn how to configure filters and sorting: [Setting Filters & Sorting for Multiple Items Snippets](/chapters/selecting-which-data-to-display/setting-filters-and-sorting-for-multiple-items-snippets)
 
-### Multi-Items Data Access Configurations
+    Learn how to set up granular, user-based permissions: [User-Based Permission Explained](/chapters/controlling-data-access/user-based-permission-explained)
+  </Step>
+  <Step title='Modify and Tweak the UI ("Make It Perfect with AI")' titleSize="h2">
+    This step is dedicated to refining the visual appearance (UI/UX) of your snippet and adding interactive elements.
 
-For multi-items snippets only, the controls in this section allow you to specify which data (based on criteria or user identity) will be pulled from the table. It includes:
+    The right side prominently features a real-time preview of your snippet, rendered within a phone mockup. This preview updates live as you make design changes.
 
-- **Filter**: Apply static filters to include only records that meet specific conditions (e.g., only show records where "Status is 'Active'"). These filters apply to anyone viewing the snippet.
-- **Sort**: Define the order in which records appear in the List View of a Multiple Items snippet.
-- **Permission**: Control who can see the data. This is crucial for implementing user-based filtering.
+    ![Quickstart Prompt Gi](/step-3.png)
 
-![Data Access Config Pn](/images/data-access-config.png)
+    **View Toggle**
 
-Learn how to configure filters and sorting: [Setting Filters & Sorting for Multiple Items Snippets](/chapters/selecting-which-data-to-display/setting-filters-and-sorting-for-multiple-items-snippets)
+    Above the preview, you'll see buttons to switch between List View and Detail View.
 
-Learn how to set up granular, user-based permissions: [User-Based Permission Explained](/chapters/controlling-data-access/user-based-permission-explained)
+    - For Single Item snippets, only the Detail View is available, as the snippet only displays one record's full details.
+    - For Multiple Items snippets, both List View (showing the list of records) and Detail View (showing the details of a selected record) are available. You can toggle between them here to preview both interfaces. Clicking on an item in the 'List View' will automatically navigate to the 'Detail View' presenting the selected item.
 
----
+    ![View Toggle Gi](/images/view-toggle.gif)
 
-## 3. Modify and Tweak the UI ("Make It Perfect")
+    **AI Prompt Input**
 
-This step is dedicated to refining the visual appearance (UI/UX) of your snippet and adding interactive elements.
+    Below the preview, you'll find a text box labeled "What would you like to modify?". This is the primary way you use Crust AI's generative capabilities. You can type natural language requests here to:
 
-The right side prominently features a real-time preview of your snippet, rendered within a phone mockup. This preview updates live as you make design changes.
+    - Change the design, layout, colors, and other visual styles (e.g., "Make the title font larger", "Present the status as a chip", "Change the header color to red").
+    - Adjust the layout and arrangement of elements (e.g., "Move the budget above the dates").
+    - Add interactive elements like buttons or checkboxes ("Allow the user to edit the status using a dropdown")
+    - Control record fields visibility ("Hide the 'Admin Notes' field")
 
-![Quickstart Prompt Gi](/step-3.png)
+    ![Quickstart Prompt Gi](/images/quickstart-prompt.gif)
 
-**View Toggle**
+    <Warning>
+      **Important Note about the AI Prompt**\
+      The prompt is designed for modifying the snippet's appearance and adding interactive elements that operate on the already selected/filtered data. It cannot:
 
-Above the preview, you'll see buttons to switch between List View and Detail View.
+      - Change the snippet type (Single vs. Multiple).
+      - Select which records are included.
+      - Set filters, sorting, or permissions.
+      - Modify to edit the table schema on Airtable (adding fields, changing field types, etc).
 
-- For Single Item snippets, only the Detail View is available, as the snippet only displays one record's full details.
-- For Multiple Items snippets, both List View (showing the list of records) and Detail View (showing the details of a selected record) are available. You can toggle between them here to preview both interfaces. Clicking on an item in the 'List View' will automatically navigate to the 'Detail View' presenting the selected item.
+      These data configuration aspects are controlled separately in Step 2, or directly in Airtable.
+    </Warning>
+    ### Additional Controls
 
-![View Toggle Gi](/images/view-toggle.gif)
+    **Full Screen Preview**: Use the full screen button to view the snippet preview in a larger format and see how it renders on a desktop screen as well as mobile.
 
-**AI Prompt Input**
+    ![Full Screen Btn Pn](/images/full-screen-btn.png)
 
-Below the preview, you'll find a text box labeled "What would you like to modify?". This is the primary way you use Crust AI's generative capabilities. You can type natural language requests here to:
+    **Layout Direction**: You can change the text and layout direction (Left-to-Right or Right-to-Left) to support languages like Hebrew or Arabic, ensuring your snippet is culturally and linguistically appropriate for your audience.
 
-- Change the design, layout, colors, and other visual styles (e.g., "Make the title font larger", "Present the status as a chip", "Change the header color to red").
-- Adjust the layout and arrangement of elements (e.g., "Move the budget above the dates").
-- Add interactive elements like buttons or checkboxes ("Allow the user to edit the status using a dropdown")
-- Control record fields visibility ("Hide the 'Admin Notes' field")
+    ![Layout Direction Btn Pn](/layout-direction-btn2.png)
 
-![Quickstart Prompt Gi](/images/quickstart-prompt.gif)
+    **Edit Code**: For advanced technical users, there's an option to "Edit Code Manually". This allows you to directly access and modify the underlying React code of the snippet. Caution: This feature is for experienced developers only. Incorrect code changes can easily break your snippet. We recommend using the AI prompt and no-code options for most customizations.
 
-<Warning>
-  **Important Note about the AI Prompt**\
-  The prompt is designed for modifying the snippet's appearance and adding interactive elements that operate on the already selected/filtered data. It cannot:
+    ![Edit Code Btn Pn](/images/edit-code-btn.png)
+  </Step>
+  <Step title='Share ("Looking good?")' titleSize="h2">
+    Once you're satisfied with your snippet's data and design, this final section allows you to get the URL and share it.
 
-  - Change the snippet type (Single vs. Multiple).
-  - Select which records are included.
-  - Set filters, sorting, or permissions.
-  - Modify to edit the table schema on Airtable (adding fields, changing field types, etc).
+    ![Step 4 Pn](/images/step-4.png)
 
-  These data configuration aspects are controlled separately in Step 2, or directly in Airtable.
-</Warning>
+    Click the `Get Shareable URL` button. Depending on your snippet's type and permission settings, you'll get different URL options. To learn more about how this works, see: [Understanding the Shareable URL Structure](/chapters/building-and-understanding-snippets/understanding-snippet-types)
 
-### Additional Controls
+    You can share these URLs directly or integrate them into Airtable buttons, automations (Make/Zapier), or other tools.
 
-**Full Screen Preview**: Use the full screen button to view the snippet preview in a larger format and see how it renders on a desktop screen as well as mobile.
-
-![Full Screen Btn Pn](/images/full-screen-btn.png)
-
-**Layout Direction**: You can change the text and layout direction (Left-to-Right or Right-to-Left) to support languages like Hebrew or Arabic, ensuring your snippet is culturally and linguistically appropriate for your audience.
-
-![Layout Direction Btn Pn](/layout-direction-btn2.png)
-
-**Edit Code**: For advanced technical users, there's an option to "Edit Code Manually". This allows you to directly access and modify the underlying React code of the snippet. Caution: This feature is for experienced developers only. Incorrect code changes can easily break your snippet. We recommend using the AI prompt and no-code options for most customizations.
-
-![Edit Code Btn Pn](/images/edit-code-btn.png)
-
----
-
-## 4. Share ("Looking good?")
-
-Once you're satisfied with your snippet's data and design, this final section allows you to get the URL and share it.
-
-![Step 4 Pn](/images/step-4.png)
-
-Click the `Get Shareable URL` button. Depending on your snippet's type and permission settings, you'll get different URL options. To learn more about how this works, see: [Understanding the Shareable URL Structure](/chapters/building-and-understanding-snippets/understanding-snippet-types)
-
-You can share these URLs directly or integrate them into Airtable buttons, automations (Make/Zapier), or other tools.
-
-Learn more about integrating snippets into workflows: [Share a Snippet Directly from Airtable](/chapters/sharing-your-snippets/share-a-snippet-directly-from-airtable) and [Integrate a Snippet in a Make/Zapier Flow](/chapters/sharing-your-snippets/integrate-a-snippet-in-a-make-or-zapier-flow)
+    Learn more about integrating snippets into workflows: [Share a Snippet Directly from Airtable](/chapters/sharing-your-snippets/share-a-snippet-directly-from-airtable) and [Integrate a Snippet in a Make/Zapier Flow](/chapters/sharing-your-snippets/integrate-a-snippet-in-a-make-or-zapier-flow)
+  </Step>
+</Steps>
 
 ---
 
