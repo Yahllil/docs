@@ -1,26 +1,26 @@
 ---
-title: Selecting a Record for Single Item Snippets
-sidebarTitle: Single Item Snippet
-description: Learn how to choose the specific Airtable record that a Single Item Snippet will display.
-icon: scan
+title: "Selecting a Record for Single Item Snippets"
+sidebarTitle: "Single Item Snippet"
+description: "Learn how to choose the specific Airtable record that a Single Item Snippet will display."
+icon: "scan"
 ---
 
-<Tip icon="search">
-  **Record Selection**  
+<Tip>
+  **Record Selection**\
   As you learned in [Understanding Snippet Types](/chapters/building-and-understanding-snippets/understanding-snippet-types), a Single Item Snippet is designed to focus on and display the detailed information of just **one specific record** from your Airtable table. This page explains how you choose that particular record within the Snippet Builder.
 </Tip>
 
 ## Choosing Your Record in the Builder
 
-When you select the "Single Item" snippet type in Step 1 of the builder, Step 2 is where you specify *which* record's details this specific snippet instance will display.
+When you select the "Single Item" snippet type in Step 1 of the builder, Step 2 is where you specify _which_ record's details this specific snippet instance will display.
 
-[Screenshot of the Snippet Builder interface highlighting Step 2, specifically the table preview area with radio buttons next to each record.]
+![Single Step 2 Pn](/single-step-2-2.png)
 
 In the data preview table on the left side of Step 2, you will see all the records currently in your selected Airtable table. Each record has a radio button next to its name (or primary field).
 
 Simply **click the radio button** next to the record whose details you want this snippet to present.
 
-[Gif showing a user clicking the radio button next to a specific record in the table preview.]
+![Quick Start Single Snippet Record Selection Gi](/images/quick-start-single-snippet-record-selection.gif)
 
 Once you select a record, the phone preview on the right (in Step 3) will immediately update to display the detailed information of that chosen record. This gives you a live preview of what your end-user will see.
 
@@ -30,14 +30,12 @@ Once you select a record, the phone preview on the right (in Step 3) will immedi
 
 The specific record you select in Step 2 directly influences the Shareable URL for this Single Item Snippet. The unique **Record ID** of the selected record is automatically embedded as a parameter in the snippet's URL.
 
-[Screenshot of the modal showing the generated URL with the `?rec=` parameter highlighted.]
-
 For example, if you select the record whose Record ID is `rec123456789`, the Shareable URL for this snippet might look something like:
 
 ```
 https://app.trycrust.ai/snippets/<your_snippet_id>/view/single?rec=rec123456789
 ```
 
-Anyone using this specific URL will be directed to your snippet displaying *only* this specific record details. To share a different record's details via a Single Item Snippet, you can select that other record in Step 2 and generate a *new*, stand-alone Shareable URL.
+Anyone using this specific URL will be directed to your snippet displaying _only_ this specific record details. To share a different record's details via a Single Item Snippet, you can select that other record in Step 2 and generate a _new_, stand-alone Shareable URL.
 
 For a more detailed breakdown of how the Shareable URL is constructed and its parameters, see: [Understanding the Shareable URL Structure](/chapters/sharing-your-snippets/understanding-the-shareable-url-structure)
