@@ -17,8 +17,8 @@ Crust AI offers two distinct snippet types to cover the most common data visuali
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Purpose**         | Designed to focus on and display the comprehensive details of **one specific record** from your chosen Airtable table.                                                                                                                 | Designed to display a **list of records** from your chosen Airtable table. These records can be filtered and sorted according to criteria you define.                                                                                                                                                     |
 | **Use Cases**       | Sharing a single client's complete profile <br /><br /> Showing the status of a single project <br /><br /> Providing detailed information about one product in your inventory<br /><br /> Presenting the specifics of one legal case. | Creating a dashboard of all _active_ marketing campaigns<br /><br /> Building a client portal showing all _pending_ legal matters for a specific client <br /><br /> Listing _all_ products currently in stock.                                                                                           |
-| **Primary View(s)** | This snippet type utilizes only the **Detail View**, showing all relevant fields for that singular record.                                                                                                                             | This type includes two interconnected views:<br /><br />• **List View:** The initial display showing a summarized list or overview of multiple records.<br /><br />• **Detail View:** When a user clicks on a specific item in the List View, they navigate to a detailed view of that individual record. |
-| **Preview**         | ![Single Item Snippet Preview](placeholder-single-item.png)  <br />_Screenshot of the Snippet Builder with "Single Item" selected and the phone preview showing a detailed view of one record._                                        | ![Multiple Items Snippet Preview](placeholder-multiple-items.png)  <br />_Screenshot of the Snippet Builder with "Multiple Items" selected and the phone preview showing a list view with multiple cards/items._                                                                                          |
+| **Primary View(s)** | This type includes one view:<br /> <br /> • **Detail View**, showing all relevant fields for that singular record.                                                                                                                     | This type includes two interconnected views:<br /><br />• **List View:** The initial display showing a summarized list or overview of multiple records.<br /><br />• **Detail View:** When a user clicks on a specific item in the List View, they navigate to a detailed view of that individual record. |
+| **Preview**         | <img   src="/single-snippet.png"   width="200" />                                                                                                                                                                                      | <img   src="/multi-snippet-preview.png"   width="200" />                                                                                                                                                                                                                                                  |
 
 The List View provides a high-level overview, and the Detail View provides the granular information for each item in that list.
 
@@ -30,15 +30,13 @@ Every snippet has at least a **Detail View**. A Single Item snippet _only_ has a
 
 A Multiple Items snippet has both a **List View** and a **Detail View**. The **List View** is the default view when the snippet is opened. From the List View, users can click on any individual item (record) in the list to automatically navigate to that record's **Detail View**.
 
-[Gif showing the phone preview of a Multiple Items snippet, scrolling through the List View and then clicking an item to transition to its Detail View.]
+![Multi Single Navigation Gi](/images/multi-single-navigation.gif)
 
 <Accordion title="Navigating Back">
   When viewing the Detail View of an item within a Multiple Items snippet:
 
   - In the Crust AI **Snippet Builder interface**, you can use the "List View" toggle button above the phone preview to return to the List View.
   - In the **live, published snippet** (when accessed via its Shareable URL), users simply use their web browser's standard **back button** to return to the List View from the Detail View.
-
-  [Screenshot highlighting the List View/Detail View toggle in the builder when in Multiple Items mode.]
 </Accordion>
 
 ---
@@ -51,7 +49,7 @@ The way you define _which_ specific record(s) are displayed differs based on the
   <Tab title="For Single Item Snippets">
     In Step 2 of the builder, you'll see a table preview of your Airtable data. You **select the specific record** you want this snippet to display by clicking the radio button next to its row. This selected record defines the core data for this _specific_ Single Item snippet URL.
 
-    [Screenshot highlighting the table preview in Step 2 and pointing to the radio button next to a record.]
+    ![Quick Start Single Snippet Record Selection Gi](/images/quick-start-single-snippet-record-selection.gif)
 
     The Shareable URL for this snippet will be built to directly reference the unique ID of the record you selected. Sharing this specific URL will _always_ open the snippet showing the details of that particular record.
 
@@ -61,7 +59,7 @@ The way you define _which_ specific record(s) are displayed differs based on the
   <Tab title="For Multiple Items Snippets">
     In Step 2, all records from your chosen table are initially available. You then define which records are _eligible_ to be shown in the list using the **Filter** and **Permission** settings.
 
-    [Screenshot highlighting the Filter and Permission controls in Step 2 for Multiple Items snippets.]
+    ![Data Access Config Pn](/images/data-access-config.png)
 
     - **Filters:** Apply static rules (e.g., `Status is "Active"`) to permanently exclude irrelevant records from being considered for the snippet. Anyone viewing the snippet, regardless of their identity, will only ever see records that pass these filters.
     - **Permissions (User-based):** Apply dynamic rules based on the viewer's identity to restrict which records from the _filtered_ set they are allowed to see (e.g., `Client Email is the viewer's email`). This allows the same snippet URL to show different data to different users.
