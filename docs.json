@@ -11,6 +11,14 @@
     "library": "lucide"
   },
   "favicon": "/favicon.svg",
+  "integrations": {
+    "mixpanel": {
+        "projectToken": "22bf19cf751e1e0b1219462f7dd2d6b1"
+    },
+    "intercom": {
+      "appId": "xodlrcmj"
+    }
+  },
   "navigation": {
     "groups": [
       {
