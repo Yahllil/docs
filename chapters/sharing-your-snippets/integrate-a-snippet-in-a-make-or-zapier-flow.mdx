@@ -65,7 +65,6 @@ Let's illustrate with a common use case: automatically emailing a customer a sni
         - Compose your email subject and body, embedding the dynamically constructed URL from the previous step, perhaps as a hyperlink.
       </Step>
     </Steps>
-    [Screenshot simulation of the Make email module configuration, showing the To address mapped to the customer email variable, and the body containing text and the dynamically constructed snippet URL.]
   </Tab>
   <Tab title="Zapier">
     <Steps>
@@ -106,7 +105,7 @@ In both platforms, when a new Airtable record triggers the workflow, the automat
 ---
 
 <Warning>
-  **``Important URL Parameter Choice: rec vs. p``**
+  **`Important URL Parameter Choice: rec vs. p`**
 
   - Use `?rec=` when linking to the **Detail View** of a specific record (typically for Single Item snippets or linking directly to one item's detail).
   - Use `?p=` when linking to a **Multiple Items snippet's List View** where **User-based Permission** is enabled, passing the relevant permission value as the identifier (like email or any other unique ID you have configured).
