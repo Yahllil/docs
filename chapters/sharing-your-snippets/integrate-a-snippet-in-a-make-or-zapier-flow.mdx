@@ -1,12 +1,12 @@
 ---
-title: Integrate a Snippet in a Make/Zapier Flow
-sidebarTitle: Integrate with Make/Zapier
-description: Learn how to automate the distribution of personalized Crust AI Snippet URLs using Make (formerly Integromat) and Zapier.
-icon: zap
+title: "Integrate a Snippet in a Make/Zapier Flow"
+sidebarTitle: "Integrate with Make/Zapier"
+description: "Learn how to automate the distribution of personalized Crust AI Snippet URLs using Make (formerly Integromat) and Zapier."
+icon: "zap"
 ---
 
-<Tip icon="robot">
-  **Automate Snippet Sharing**  
+<Tip>
+  **Automate Snippet Sharing**\
   Beyond manually sharing links or [triggering them from Airtable buttons](/chapters/sharing-your-snippets/share-a-snippet-directly-from-airtable), you can automate the distribution of personalized Crust AI Snippet URLs using popular workflow automation platforms like Make (formerly Integromat) and Zapier.
 </Tip>
 
@@ -25,9 +25,9 @@ For a detailed explanation of the URL structure, see: [Understanding the Shareab
 Let's illustrate with a common use case: automatically emailing a customer a snippet link to view their specific order details after they place an order.
 
 <Accordion title="Scenario Setup">
-  *   **Airtable Setup:** You have an "Orders" table with fields like `Product Name`, `Total Amount`, and `Customer Email`.
-  *   **Crust AI Setup:** You have created a **Single Item Snippet** based on this "Orders" table, designed to show the details of one order (let's call it the "Your Order Summary" snippet). You have its base URL and Snippet ID ready (e.g., `https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single`).
-  *   **Goal:** When a new record is added to the "Orders" table, automatically send an email to the `Customer Email` containing a link to the "Your Order Summary" snippet, displaying *only* the details of that newly created order.
+  - **Airtable Setup:** You have an "Orders" table with fields like `Product Name`, `Total Amount`, and `Customer Email`.
+  - **Crust AI Setup:** You have created a **Single Item Snippet** based on this "Orders" table, designed to show the details of one order (let's call it the "Your Order Summary" snippet). You have its base URL and Snippet ID ready (e.g., `https://app.trycrust.ai/<order_summary_snippet_id>/detail/`).
+  - **Goal:** When a new record is added to the "Orders" table, automatically send an email to the `Customer Email` containing a link to the "Your Order Summary" snippet, displaying _only_ the details of that newly created order.
 </Accordion>
 
 ---
@@ -45,19 +45,24 @@ Let's illustrate with a common use case: automatically emailing a customer a sni
       </Step>
       <Step title="Construct the Snippet URL">
         Within the email body configuration, you will build the dynamic URL using Make's variable mapping:
-        *   Start with the static part of your snippet URL:
-          ```text
-          https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec=
-          ```
-        *   Append the **`ID`** (Record ID) variable provided by the Airtable trigger module. The final URL string in Make would look similar to:
-          ```text Make URL Example
-          https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec={{1.id}}
-          ```
-          *(The exact variable reference `{{1.id}}` might differ based on your Make scenario structure. Ensure you map the Record ID correctly.)*
+
+        - Start with the static part of your snippet URL:
+
+        ```text
+        https://app.trycrust.ai/<order_summary_snippet_id>/detail?rec=
+        ```
+
+        - Append the **`ID`** (Record ID) variable provided by the Airtable trigger module. The final URL string in Make would look similar to:
+
+        ```text Make URL Example
+        https://app.trycrust.ai/<order_summary_snippet_id>/detail?rec={{1.id}}
+        ```
+
+        _`(The exact variable reference {{1.id}} might differ based on your Make scenario structure. Ensure you map the Record ID correctly.)`_
       </Step>
       <Step title="Configure Email Details">
-        *   Map the `Customer Email` field variable from the Airtable trigger to the "To" address field.
-        *   Compose your email subject and body, embedding the dynamically constructed URL from the previous step, perhaps as a hyperlink.
+        - Map the `Customer Email` field variable from the Airtable trigger to the "To" address field.
+        - Compose your email subject and body, embedding the dynamically constructed URL from the previous step, perhaps as a hyperlink.
       </Step>
     </Steps>
     [Screenshot simulation of the Make email module configuration, showing the To address mapped to the customer email variable, and the body containing text and the dynamically constructed snippet URL.]
@@ -72,19 +77,24 @@ Let's illustrate with a common use case: automatically emailing a customer a sni
       </Step>
       <Step title="Construct the Snippet URL">
         In the configuration for the email body, build the dynamic URL using Zapier's variable insertion:
-        *   Type the static part:
-          ```text
-          https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec=
-          ```
-        *   Insert the **`Record ID`** variable from the Airtable trigger step. The final URL string in Zapier would look like:
-          ```text Zapier URL Example
-          https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec=[Record ID]
-          ```
-          *(Using Zapier's typical variable representation. Select the Record ID field from the Trigger step data.)*
+
+        - Type the static part:
+
+        ```text
+        https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec=
+        ```
+
+        - Insert the **`Record ID`** variable from the Airtable trigger step. The final URL string in Zapier would look like:
+
+        ```text Zapier URL Example
+        https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec=[Record ID]
+        ```
+
+        _(Using Zapier's typical variable representation. Select the Record ID field from the Trigger step data.)_
       </Step>
       <Step title="Configure Email Details">
-        *   Map the `Customer Email` field from the Airtable trigger to the "To" address field.
-        *   Write your email content, inserting the dynamic URL generated in the previous step where needed (e.g., using Zapier's formatting options to create a clickable link).
+        - Map the `Customer Email` field from the Airtable trigger to the "To" address field.
+        - Write your email content, inserting the dynamic URL generated in the previous step where needed (e.g., using Zapier's formatting options to create a clickable link).
       </Step>
     </Steps>
     [Screenshot simulation of the Zapier email action configuration, showing the To address mapped, and the body containing the dynamic snippet URL constructed with Zapier variables.]
@@ -96,9 +106,10 @@ In both platforms, when a new Airtable record triggers the workflow, the automat
 ---
 
 <Warning>
-  **Important URL Parameter Choice: `rec` vs. `p`**
-  *   Use `?rec=` when linking to the **Detail View** of a specific record (typically for Single Item snippets or linking directly to one item's detail).
-  *   Use `?p=` when linking to a **Multiple Items snippet's List View** where **User-based Permission** is enabled, passing the relevant permission value as the identifier (like email or any other unique ID you have configured).
+  **``Important URL Parameter Choice: rec vs. p``**
+
+  - Use `?rec=` when linking to the **Detail View** of a specific record (typically for Single Item snippets or linking directly to one item's detail).
+  - Use `?p=` when linking to a **Multiple Items snippet's List View** where **User-based Permission** is enabled, passing the relevant permission value as the identifier (like email or any other unique ID you have configured).
 </Warning>
 
 ---
