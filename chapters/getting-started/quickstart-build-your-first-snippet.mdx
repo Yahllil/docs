@@ -61,26 +61,23 @@ Our goal is to create a shareable mini-app for each client where they can see th
 ## Step 1: Connect Your Airtable Base
 
 1. Go to [app.trycrust.ai](https://app.trycrust.ai) and sign in.
-2. You'll be prompted to connect your Airtable base. Click the `Connect Airtable` button.
+2. You'll be prompted to add an integration and connect your Airtable base.
 3. Follow the prompts in the Airtable authorization window that appears. Select the workspace and the specific base containing your "Campaigns" table.
 4. Grant Crust AI the requested permissions (read access to data and structure, and write access if you plan to add interactive elements later).
 
-[Gif showing the process from clicking "Connect Airtable", selecting a workspace and base in the Airtable authorization pop-up, and confirming access.]
+![Quickstart Connect Airtable Gi](/images/quickstart-connect-airtable.gif)
 
-Once connected, you'll see the "Your Snippets" dashboard.
-
-[Screenshot of the "Your Snippets" dashboard showing a "Create New Snippet" card.]
+Once connected, you'll be able to access the "Snippets" dashboard.
 
 ---
 
 ## Step 2: Create a New Snippet
 
 1. Click the `Create New Snippet` button.
-2. Select the Airtable base you just connected (e.g., "Marketing Campaigns").
-3. Select the table you want to build the snippet from (e.g., "Campaigns").
-4. Click `Create Snippet`.
+2. Select the Airtable table you want to build the snippet from (e.g., "Campaigns").
+3. Click `Create Snippet`.
 
-[Gif showing clicking "Create New Snippet", selecting the base, selecting the "Campaigns" table, and clicking "Create Snippet".]
+![Quickstart Create New Snippet Gi](/images/quickstart-create-new-snippet.gif)
 
 Crust AI's AI will now analyze the structure of your selected table and begin generating the initial snippet interface. This may take a moment.
 
@@ -204,7 +201,7 @@ For a User-based permission snippet, the standard shareable URL will ask the vie
   This direct URL includes the permission value as a query parameter, for example:
 
   ```
-  https://app.trycrust.ai/snippets/<your_snippet_id>/view/multi?p=jamie@example.com
+  https://app.trycrust.ai/<your_snippet_id>/list?p=jamie@example.com
   ```
 </Accordion>
 
