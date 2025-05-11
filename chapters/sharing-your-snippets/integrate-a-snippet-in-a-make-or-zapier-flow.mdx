@@ -79,14 +79,22 @@ Let's illustrate with a common use case: automatically emailing a customer a sni
 
         - Type the static part:
 
+          ```text
+          https://app.trycrust.ai/<order_summary_snippet_id>/detail?rec=
+          ```
+
         ```text
-        https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec=
+        https://app.trycrust.ai/<order_summary_snippet_id>/detial?rec=
         ```
 
         - Insert the **`Record ID`** variable from the Airtable trigger step. The final URL string in Zapier would look like:
 
+          ```text
+          https://app.trycrust.ai/<order_summary_snippet_id>/detail?rec=[Record ID]
+          ```
+
         ```text Zapier URL Example
-        https://app.trycrust.ai/snippets/<order_summary_snippet_id>/view/single?rec=[Record ID]
+        https://app.trycrust.ai/<order_summary_snippet_id>/detail?rec=[Record ID]
         ```
 
         _(Using Zapier's typical variable representation. Select the Record ID field from the Trigger step data.)_
