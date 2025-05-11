@@ -26,7 +26,16 @@ Before diving into implementation, it's helpful to understand the different type
 
 The most basic form of navigation is already built into every **Multiple Items snippet** by default:
 
-[Screenshot showing a Multiple Items snippet with a List View containing several items, and an arrow pointing to the Detail View that appears when one is clicked]
+![Multi Single Navigation Gi](/images/multi-single-navigation.gif)
+
+```mermaid
+graph TD
+    A[Multiple Items Snippet] --> B[List View]
+
+    B -->|User selects an item| C[Detail View]
+
+    C -->|User goes back| B
+```
 
 <Info>
   **Built-In Functionality**\
@@ -49,8 +58,6 @@ First, ensure you have created the snippets you want to connect:
 2. Create your "target" snippet (where the user will navigate to).
 3. Get the **Shareable URL** of your target snippet (you'll likely modify this later).
 
-[Screenshot showing two snippets side by side - one labeled "Origin: Project Details" and one labeled "Target: Tasks List"]
-
 ### Step 2: Add a Button Field in Airtable
 
 To create navigation between snippets, you'll use Airtable's **Button** field type:
@@ -61,8 +68,6 @@ To create navigation between snippets, you'll use Airtable's **Button** field ty
 4. Name it descriptively (e.g., "View Tasks").
 5. Set the action to **Open URL**.
 6. In the URL formula, paste the base Shareable URL of your **target** snippet. We'll add dynamic parameters later if needed.
-
-[Screenshot of Airtable interface showing the creation of a new Button field with "Open URL" selected]
 
 <Tip>
   **URL Structure is Key**\
@@ -80,8 +85,6 @@ After adding the button field in Airtable:
    ```text Prompt Example
    Add the 'View Tasks' button that navigates to its URL when clicked
    ```
-
-[Screenshot of the Snippet Builder showing the AI prompt input with the above instruction, and the resulting button appearing in the preview]
 
 ---
 
@@ -102,19 +105,15 @@ Your goal is to create:
 2. A **Project Tasks** snippet (Multiple Items) showing _only_ tasks related to a specific project.
 3. Navigation from the Project Detail snippet to its related Tasks List snippet.
 
-[Screenshot of Airtable showing the two tables: Projects and Tasks, with the link between them highlighted]
-
 <Steps>
   <Step title="Create Both Snippets">
     1. **Create Project Detail Snippet:**
        - Follow the [Quickstart guide](/chapters/getting-started/quickstart-build-your-first-snippet) to create a **Single Item** snippet based on your **Projects** table. Customize as needed.
-         [Screenshot of the complete Project Detail snippet in the Builder]
     2. **Create Project Tasks Snippet:**
        - Create a **Multiple Items** snippet based on your **Tasks** table. Customize as needed. _Initially, this will show ALL tasks._
-         [Screenshot of the Tasks snippet Builder with the filter configuration panel visible]
     3. **Get Tasks Snippet URL:**
        - In the Tasks snippet builder, go to Step 4 and click "Get Shareable URL".
-       - Copy the base URL (e.g., `https://app.trycrust.ai/<your_tasks_snippet_id>/list`). We'll add parameters later. [Screenshot of the copied URL with the structure highlighted]
+       - Copy the base URL (e.g., `https://app.trycrust.ai/<your_tasks_snippet_id>/list`). We'll add parameters later.
   </Step>
   <Step title="Create Navigation Button (Airtable)">
     1. Go to your **Projects** table in Airtable.
@@ -127,10 +126,9 @@ Your goal is to create:
        ```
 
        _`(Replace <your_tasks_snippet_id>)`_
-       [Screenshot of the Airtable Button field configuration showing the initial formula]
   </Step>
   <Step title="Configure Tasks Snippet Permission (Crust AI)">
-    To ensure the Tasks snippet only shows tasks for the _clicked_ project, we need User-based Permission based on the Project's Record ID.
+    To ensure the Tasks snippet only shows tasks for the _clicked_ project, we need [User-based Permission](https://docs.trycrust.ai/chapters/controlling-data-access/user-based-permission-explained) based on the Project's Record ID.
 
     1. **Expose Project Record ID (Airtable):**
        - In your **Projects** table, add a **Formula** field named `Project Record ID` with the formula `RECORD_ID()`.
@@ -144,7 +142,6 @@ Your goal is to create:
        - Select **User-based permission**.
        - In the "Which field holds the user's identifier?" dropdown, select your new **`Project Record ID Lookup`** field.
        - Click **Apply Permission**.
-         [Screenshot of the Permission configuration in the Tasks snippet Builder showing the lookup field selected]
   </Step>
   <Step title="Update 'View Tasks' Button URL (Airtable)">
     Now, modify the "View Tasks" button formula in the **Projects** table to pass the current project's Record ID as the permission parameter (`p`).
@@ -157,7 +154,6 @@ Your goal is to create:
        ```
 
        _`(Replace <your_tasks_snippet_id>)`_
-       [Screenshot of the updated Airtable Button field configuration]
 
        <Tip>
          Learn more about [Shareable URL Structure](/chapters/sharing-your-snippets/understanding-the-shareable-url-structure) to easily build your shareable snippet URL.
@@ -171,8 +167,6 @@ Your goal is to create:
        ```text Prompt Example
        Add the 'View Tasks' button in a prominent position below the project details
        ```
-
-       [Screenshot of the AI prompt and the resulting button in the Project Detail snippet]
   </Step>
   <Step title="Test the Navigation">
     Now when a user views the Project Detail snippet and clicks the "View Tasks" button:
@@ -180,7 +174,6 @@ Your goal is to create:
     1. They'll navigate to the Tasks snippet URL, which now includes `?p=<project_record_id>`.
     2. The Tasks snippet will use the provided Project Record ID to dynamically filter and show only tasks related to the original project (matching the `Project Record ID Lookup` field).
     3. The user can navigate back using the browser's default back button.
-       [Screenshot or illustration showing the navigation flow between the two snippets]
   </Step>
 </Steps>
 
@@ -192,13 +185,13 @@ Your goal is to create:
   When you want to link directly to the Detail View of a specific record (useful for linking _from_ a list view to a dedicated Single Item snippet instead of the built-in detail view), you need to include the `rec` parameter with the target record's ID:
 
   ```
-  https://app.trycrust.ai/snippets/<snippet_id>/view/single?rec=<record_id>
+  https://app.trycrust.ai/<snippet_id>/detail?rec=<record_id>
   ```
 
   In Airtable, you can make this dynamic using the `RECORD_ID()` function in your button field formula:
 
   ```
-      "https://app.trycrust.ai/snippets/<target_snippet_id>/view/single?rec=" & RECORD_ID()
+      "https://app.trycrust.ai/<target_snippet_id>/detail?rec=" & RECORD_ID()
   ```
 </Accordion>
 
@@ -206,7 +199,7 @@ Your goal is to create:
   For Multiple Items snippets with user-based permissions, you can pass any value via the `p` parameter that identifies the relationship or user context:
 
   ```text URL Structure
-  https://app.trycrust.ai/snippets/<snippet_id>/view/multi?p=<permission_value>
+  https://app.trycrust.ai/<snippet_id>/list?p=<permission_value>
   ```
 
   This could be an email, a record ID (as in the example), or any other unique identifier that matches your configured permission field in the target snippet.
